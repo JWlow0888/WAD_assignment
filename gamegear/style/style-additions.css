@@ -9,7 +9,7 @@
 
 #addListingForm label, #filterSection label {
 	display: block;
-	margin-top: 10px;
+	margin-top: 25px;
 	font-weight: bold;
 }
 
@@ -92,4 +92,9 @@
 	.listingCard {
 		width: 90%;
 	}
+}
+
+/* Add this to the bottom of your CSS addition file */
+.form-group {
+    margin-bottom: 25px; 
 }
