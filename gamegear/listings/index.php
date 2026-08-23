@@ -59,6 +59,7 @@
 
                 if (mysqli_stmt_execute($stmt)) {
                     $success_msg = "Listing added successfully!";
+                    $_POST = array();
                 } else {
                     $errors[] = "Database error: " . mysqli_error($conn);
                 }
@@ -96,11 +97,13 @@
         <section id="addListingForm">
             <h2>Post a New Listing</h2>
             <form action="index.php" method="post" enctype="multipart/form-data">
-
+                <div class="form-group">
                 <label for="seller_id">Seller ID:</label>
                 <input type="number" name="seller_id" id="seller_id"
                        value="<?php echo isset($_POST['seller_id']) ? htmlspecialchars($_POST['seller_id']) : ''; ?>" required>
+                </div>
 
+                <div class="form-group">
                 <label for="category_id">Category:</label>
                 <select name="category_id" id="category_id" required>
                     <?php
@@ -110,18 +113,26 @@
                     }
                     ?>
                 </select>
+                </div>
 
+                <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" name="title" id="title"
                        value="<?php echo isset($_POST['title']) ? htmlspecialchars($_POST['title']) : ''; ?>" required>
+                </div>
 
+                <div class="form-group">
                 <label for="description">Description:</label>
                 <textarea name="description" id="description" rows="3"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
+                </div>
 
+                <div class="form-group">
                 <label for="price">Price (RM):</label>
                 <input type="number" step="0.01" name="price" id="price"
                        value="<?php echo isset($_POST['price']) ? htmlspecialchars($_POST['price']) : ''; ?>" required>
+                </div>
 
+                <div class="form-group">
                 <label for="item_condition">Condition:</label>
                 <select name="item_condition" id="item_condition">
                     <option value="New">New</option>
@@ -129,9 +140,12 @@
                     <option value="Used - Good">Used - Good</option>
                     <option value="Used - Fair">Used - Fair</option>
                 </select>
+                </div>
 
+                <div class="form-group">
                 <label for="image">Item Image:</label>
                 <input type="file" name="image" id="image" accept="image/*">
+                </div>
 
                 <button type="submit" name="add_listing" class="button">Add Listing</button>
             </form>
