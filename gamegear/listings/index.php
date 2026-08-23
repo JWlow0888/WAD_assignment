@@ -52,14 +52,13 @@
                     }
                 }
 
-
                 $stmt = mysqli_prepare($conn, "INSERT INTO listings (seller_id, category_id, title, description, price, item_condition, image_path)
-                                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+                                               VALUES (?, ?, ?, ?, ?, ?, ?)");
                 mysqli_stmt_bind_param($stmt, "iissdss", $seller_id, $category_id, $title, $description, $price, $condition, $image_path);
 
                 if (mysqli_stmt_execute($stmt)) {
                     $success_msg = "Listing added successfully!";
-                    $_POST = array();
+                    $_POST = array(); // Clears the form inputs on success
                 } else {
                     $errors[] = "Database error: " . mysqli_error($conn);
                 }
@@ -67,9 +66,7 @@
             }
         }
 
-
         // DELETE: Handle listing deletion
-
         if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
             $delete_id = $_GET['delete'];
             $stmt = mysqli_prepare($conn, "DELETE FROM listings WHERE listing_id = ?");
