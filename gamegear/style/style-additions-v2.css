@@ -1,0 +1,76 @@
+/* =========================================================
+   ADD-ON for v2: comments, related listings, filter bar
+   (Add this AFTER the style-additions.css block from before)
+   ========================================================= */
+
+#filterSection form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	align-items: flex-end;
+	justify-content: center;
+	max-width: none;
+}
+
+#filterSection form > div {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.views {
+	font-size: 0.85em;
+	color: rgb(120,120,120);
+}
+
+#relatedListings, #commentsSection {
+	max-width: 700px;
+	margin: 30px auto;
+	text-align: left;
+}
+
+#commentForm {
+	background-color: rgb(255,255,255);
+	padding: 15px;
+	border: 1px solid rgb(220,220,220);
+	margin-bottom: 20px;
+	max-width: none;
+}
+
+#commentForm label {
+	display: block;
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+#commentForm input, #commentForm textarea {
+	width: 100%;
+	padding: 6px;
+	box-sizing: border-box;
+	margin-top: 4px;
+}
+
+.commentCard {
+	background-color: rgb(248,248,248);
+	border: 1px solid rgb(220,220,220);
+	padding: 10px 15px;
+	margin-bottom: 10px;
+}
+
+.commenterName {
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+.commentDate {
+	font-size: 0.8em;
+	color: rgb(120,120,120);
+}
+
+/* Responsive: stack the filter bar on smaller screens */
+@media (max-width: 600px) {
+	#filterSection form {
+		flex-direction: column;
+		align-items: stretch;
+	}
+}
