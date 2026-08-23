@@ -14,9 +14,8 @@
         <h1>Browse Listings</h1>
 
         <?php
-        // ---------------------------------------------
+
         // CREATE: Handle new listing submission
-        // ---------------------------------------------
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_listing'])) {
             $seller_id   = mysqli_real_escape_string($conn, $_POST['seller_id']);
             $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
@@ -45,9 +44,8 @@
             }
         }
 
-        // ---------------------------------------------
+
         // DELETE: Handle listing deletion
-        // ---------------------------------------------
         if (isset($_GET['delete'])) {
             $delete_id = mysqli_real_escape_string($conn, $_GET['delete']);
             $sql = "DELETE FROM listings WHERE listing_id = '$delete_id'";
@@ -60,9 +58,7 @@
         }
         ?>
 
-        <!-- ============================================
-             CREATE FORM: Post a New Listing
-        ============================================= -->
+        <!-- CREATE FORM: Post a New Listing -->
         <section id="addListingForm">
             <h2>Post a New Listing</h2>
             <form action="index.php" method="post" enctype="multipart/form-data">
@@ -104,9 +100,7 @@
             </form>
         </section>
 
-        <!-- ============================================
-             READ FILTER: Filter by Category
-        ============================================= -->
+        <!-- READ FILTER: Filter by Category -->
         <section id="filterSection">
             <form action="index.php" method="get">
                 <label for="filter_category">Filter by Category:</label>
@@ -123,9 +117,7 @@
             </form>
         </section>
 
-        <!-- ============================================
-             READ: Listing Grid
-        ============================================= -->
+        <!-- READ: Listing Grid -->
         <section id="listingGrid">
             <?php
             if (isset($_GET['category_id']) && $_GET['category_id'] != "") {
