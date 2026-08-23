@@ -19,9 +19,8 @@
         } else {
             $id = mysqli_real_escape_string($conn, $_GET['id']);
 
-            // ---------------------------------------------
+
             // UPDATE: Handle form submission
-            // ---------------------------------------------
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_listing'])) {
                 $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
                 $title       = mysqli_real_escape_string($conn, $_POST['title']);
