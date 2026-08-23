@@ -1,16 +1,7 @@
--- =========================================================
--- GameGear Exchange - Database Schema
--- UECS2094/UECS2194 Group Assignment
--- =========================================================
 
 CREATE DATABASE IF NOT EXISTS gamegear_exchange;
 USE gamegear_exchange;
 
--- ---------------------------------------------------------
--- Table: users
--- (Full login logic is handled by Person 1 - this table
--- just needs to exist so 'listings' can reference a seller)
--- ---------------------------------------------------------
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -20,19 +11,13 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ---------------------------------------------------------
--- Table: categories
--- ---------------------------------------------------------
+
 CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(50) NOT NULL
 );
 
--- ---------------------------------------------------------
--- Table: listings
--- This is the main table for the Item Listing / Item
--- Details pages (Person 4's CRUD focus)
--- ---------------------------------------------------------
+
 CREATE TABLE listings (
     listing_id INT AUTO_INCREMENT PRIMARY KEY,
     seller_id INT NOT NULL,
@@ -47,10 +32,6 @@ CREATE TABLE listings (
     FOREIGN KEY (seller_id) REFERENCES users(user_id),
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
-
--- =========================================================
--- Sample Data (so the pages aren't empty when you demo)
--- =========================================================
 
 INSERT INTO users (full_name, email, password, phone) VALUES
 ('Low Jun Wei', 'low@example.com', 'password123', '012-3456789'),
