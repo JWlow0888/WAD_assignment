@@ -14,45 +14,82 @@
         <h1>Edit Listing</h1>
 
         <?php
-        if (!isset($_GET['id'])) {
+        $errors = array();
+        $success_msg = "";
+
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
             echo "<p>No listing selected. <a href='index.php'>Back to Listings</a></p>";
         } else {
-            $id = mysqli_real_escape_string($conn, $_GET['id']);
+            $id = $_GET['id'];
 
 
             // UPDATE: Handle form submission
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_listing'])) {
-                $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
-                $title       = mysqli_real_escape_string($conn, $_POST['title']);
-                $description = mysqli_real_escape_string($conn, $_POST['description']);
-                $price       = mysqli_real_escape_string($conn, $_POST['price']);
-                $condition   = mysqli_real_escape_string($conn, $_POST['item_condition']);
-                $status      = mysqli_real_escape_string($conn, $_POST['status']);
 
-                $sql = "UPDATE listings SET
-                            category_id = '$category_id',
-                            title = '$title',
-                            description = '$description',
-                            price = '$price',
-                            item_condition = '$condition',
-                            status = '$status'
-                        WHERE listing_id = '$id'";
+                if (trim($_POST['title']) == "") {
+                    $errors[] = "Title cannot be empty.";
+                }
+                if (empty($_POST['price']) || !is_numeric($_POST['price']) || $_POST['price'] <= 0) {
+                    $errors[] = "Price must be a positive number.";
+                }
 
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p class='success-msg'>Listing updated successfully!</p>";
-                } else {
-                    echo "<p class='error-msg'>Error: " . mysqli_error($conn) . "</p>";
+                if (empty($errors)) {
+                    $category_id = $_POST['category_id'];
+                    $title       = trim($_POST['title']);
+                    $description = trim($_POST['description']);
+                    $price       = $_POST['price'];
+                    $condition   = $_POST['item_condition'];
+                    $status      = $_POST['status'];
+
+                    $new_image_uploaded = false;
+
+                    // Optional: replace image if a new one was chosen
+                    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                        $image_name = time() . "_" . basename($_FILES['image']['name']);
+                        $target = "../uploads/" . $image_name;
+                        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                            $image_path = "uploads/" . $image_name;
+                            $new_image_uploaded = true;
+                        }
+                    }
+
+                    if ($new_image_uploaded) {
+                        $stmt = mysqli_prepare($conn, "UPDATE listings SET category_id=?, title=?, description=?, price=?, item_condition=?, status=?, image_path=? WHERE listing_id=?");
+                        mysqli_stmt_bind_param($stmt, "issdsssi", $category_id, $title, $description, $price, $condition, $status, $image_path, $id);
+                    } else {
+                        // No new image chosen - keep the existing image_path untouched
+                        $stmt = mysqli_prepare($conn, "UPDATE listings SET category_id=?, title=?, description=?, price=?, item_condition=?, status=? WHERE listing_id=?");
+                        mysqli_stmt_bind_param($stmt, "issdssi", $category_id, $title, $description, $price, $condition, $status, $id);
+                    }
+
+                    if (mysqli_stmt_execute($stmt)) {
+                        $success_msg = "Listing updated successfully!";
+                    } else {
+                        $errors[] = "Database error: " . mysqli_error($conn);
+                    }
+                    mysqli_stmt_close($stmt);
                 }
             }
 
+            if (!empty($errors)) {
+                foreach ($errors as $err) {
+                    echo "<p class='error-msg'>" . htmlspecialchars($err) . "</p>";
+                }
+            }
+            if ($success_msg != "") {
+                echo "<p class='success-msg'>" . htmlspecialchars($success_msg) . "</p>";
+            }
+
             // Fetch current listing data to pre-fill the form
-            $sql = "SELECT * FROM listings WHERE listing_id = '$id'";
-            $result = mysqli_query($conn, $sql);
+            $stmt = mysqli_prepare($conn, "SELECT * FROM listings WHERE listing_id = ?");
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
             $listing = mysqli_fetch_assoc($result);
 
             if ($listing) {
                 ?>
-                <form action="edit.php?id=<?php echo $id; ?>" method="post">
+                <form action="edit.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
 
                     <label for="category_id">Category:</label>
                     <select name="category_id" id="category_id">
@@ -91,6 +128,13 @@
                         <option value="Sold" <?php echo ($listing['status'] == 'Sold') ? 'selected' : ''; ?>>Sold</option>
                     </select>
 
+                    <label for="image">Replace Image (optional):</label>
+                    <input type="file" name="image" id="image" accept="image/*">
+                    <?php if ($listing['image_path'] != "") { ?>
+                        <p>Current image:</p>
+                        <img src="../<?php echo htmlspecialchars($listing['image_path']); ?>" width="150">
+                    <?php } ?>
+
                     <button type="submit" name="update_listing" class="button">Update Listing</button>
                 </form>
                 <?php
@@ -106,3 +150,4 @@
     <?php include('../content/footer.php'); ?>
 </body>
 </html>
+
