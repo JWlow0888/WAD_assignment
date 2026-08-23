@@ -1,8 +1,3 @@
-/* =========================================================
-   ADD-ON for v2: comments, related listings, filter bar
-   (Add this AFTER the style-additions.css block from before)
-   ========================================================= */
-
 #filterSection form {
 	display: flex;
 	flex-wrap: wrap;
