@@ -1,9 +1,14 @@
+<?php
+
+$pageTitle = "Welcome to GameGear Exchange! You can buy, sell and trade certified pre-owned gear here. What are you waiting for? Level up your setup now!";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/style.css">
-    <title>GameGear Exchange</title>
+    <title>Home | GameGear Exchange</title>
 </head>
 <body>
   	<?php include('content/header.php'); ?>
@@ -19,7 +24,14 @@
 			<li>✔️ 30-Day Money-Back Guarantee</li>
 		</ul>
 	</article>
-	<a href="/gamegear/listings/" class="button">Browse Marketplace</a>
+
+    <div class="quick-access-bar">
+        <strong>Quick Access:</strong> 
+        <a href="/gamegear/admin/register.php">Admin Register & Login</a>
+        <a href="/gamegear/admin/dashboard.php">Admin Dashboard</a>
+        <a href="/gamegear/listings/">Browse Marketplace</a>
+    </div>
+
 </div>
 	<?php include('content/footer.php'); ?>
 </body>
