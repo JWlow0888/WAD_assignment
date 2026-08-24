@@ -30,3 +30,19 @@ CREATE TABLE products (
     is_available TINYINT(1) DEFAULT 1, 
     posted DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE contact_messages (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE purchases (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    buyer_email VARCHAR(255) NOT NULL,
+    purchased_items TEXT NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    purchase_date DATETIME DEFAULT CURRENT_TIMESTAMP
+);

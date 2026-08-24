@@ -38,19 +38,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 	if (empty($errors)) {
-        $total_price = 0;
-        $purchased_items_html = "<ul>";
-        
-        foreach ($selected_products as $item_id) {
-            if (isset($available_products[$item_id])) {
-                $item = $available_products[$item_id];
-                $total_price += $item['price'];
-                $purchased_items_html .= "<li>" . htmlspecialchars($item['title']) . " - RM " . number_format($item['price'], 2) . "</li>";
-            }
-        }
-        $purchased_items_html .= "</ul>";
+	        $total_price = 0;
+	        $purchased_items_html = "<ul>";
+	        $item_titles = [];
+	        
+	        foreach ($selected_products as $item_id) {
+	            if (isset($available_products[$item_id])) {
+	                $item = $available_products[$item_id];
+	                $total_price += $item['price'];
+	                $purchased_items_html .= "<li>" . htmlspecialchars($item['title']) . " - RM " . number_format($item['price'], 2) . "</li>";
+	                $item_titles[] = $item['title'];
+	            }
+	        }
+	        $purchased_items_html .= "</ul>";
 
-        $successMessage = "
+	        $db_email = mysqli_real_escape_string($conn, $buyer_email);
+	        $db_items = mysqli_real_escape_string($conn, implode(', ', $item_titles));
+	        
+	        $sql_insert = "INSERT INTO purchases (buyer_email, purchased_items, total_price) 
+	                       VALUES ('$db_email', '$db_items', '$total_price')";
+	        mysqli_query($conn, $sql_insert);
+
+	        $successMessage = "
             <div class='success-message' style='text-align: left;'>
                 <h2 style='text-align: center; margin-top: 0;'>Order Confirmed!</h2>
                 <p><strong>Verified Account:</strong> " . htmlspecialchars($buyer_email) . "</p>

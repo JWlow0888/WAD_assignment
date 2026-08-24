@@ -108,11 +108,77 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
                     }
                     echo "</tbody></table></div>";
                 }
-                mysqli_close($conn);
+            }
+            ?>
+			
+			<hr style="border: 0; border-top: 1px solid #dee2e6; margin: 50px 0;">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Manage Contact Messages</h2>
+            </div>
+
+			<?php
+            if ($conn) {
+                $sql_msgs = "SELECT * FROM contact_messages ORDER BY created_at DESC"; 
+                $result_msgs = mysqli_query($conn, $sql_msgs);
+                
+                if (!$result_msgs) {
+                    echo '<p class="error">Failed to load messages.</p>';
+                } elseif (mysqli_num_rows($result_msgs) === 0) {
+                    echo '<p>No new messages.</p>';
+                } else {
+                    echo "<div style='overflow-x: auto;'><table style='width:100%; border-collapse: collapse;' class='purchase-table'>";
+                    echo "<thead><tr><th>Name</th><th>Contact Info</th><th>Type</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>";
+                    echo "<tbody>";
+                    while ($row = mysqli_fetch_assoc($result_msgs)) {
+                        echo "<tr>";
+                        echo "<td><strong>" . htmlspecialchars($row['salutation']) . " " . htmlspecialchars($row['name']) . "</strong></td>";
+                        echo "<td><a href='mailto:" . htmlspecialchars($row['email']) . "' style='color: rgb(30, 136, 229);'>" . htmlspecialchars($row['email']) . "</a><br><span style='font-size:0.85em; color:#666;'>" . htmlspecialchars($row['phone']) . "</span></td>";
+                        echo "<td><span style='background-color: #e9ecef; padding: 3px 8px; border-radius: 12px; font-size: 12px;'>" . htmlspecialchars($row['enquiry_type']) . "</span></td>";
+                        echo "<td>" . nl2br(htmlspecialchars($row['message'])) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['created_at']) . "</td>"; 
+                        echo "<td><a href='delete_message.php?id=" . $row['id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete this message?\");'>Delete</a></td>";
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table></div>";
+                }
+            }
+            ?>
+			
+			<hr style="border: 0; border-top: 1px solid #dee2e6; margin: 50px 0;">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Manage Purchases</h2>
+            </div>
+
+            <?php
+            if ($conn) {
+                $sql_orders = "SELECT * FROM purchases ORDER BY purchase_date DESC";
+                $result_orders = mysqli_query($conn, $sql_orders);
+                
+                if (!$result_orders) {
+                    echo '<p class="error">Failed to load purchases.</p>';
+                } elseif (mysqli_num_rows($result_orders) === 0) {
+                    echo '<p>No purchases have been made yet.</p>';
+                } else {
+                    echo "<div style='overflow-x: auto;'><table style='width:100%; border-collapse: collapse;' class='purchase-table'>";
+                    echo "<thead><tr><th>Buyer Email</th><th>Items Purchased</th><th>Total (RM)</th><th>Date</th><th>Action</th></tr></thead>";
+                    echo "<tbody>";
+                    while ($row = mysqli_fetch_assoc($result_orders)) {
+                        echo "<tr>";
+                        echo "<td><a href='mailto:" . htmlspecialchars($row['buyer_email']) . "' style='color: rgb(30, 136, 229);'>" . htmlspecialchars($row['buyer_email']) . "</a></td>";
+                        echo "<td>" . htmlspecialchars($row['purchased_items']) . "</td>";
+                        echo "<td style='font-weight: bold; color: rgb(30, 136, 229);'>RM " . number_format($row['total_price'], 2) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['purchase_date']) . "</td>";
+                        echo "<td><a href='delete_purchase.php?id=" . $row['id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete this purchase record?\");'>Delete</a></td>";
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table></div>";
+                }
+				mysqli_close($conn);
             }
             ?>
 
-            <!-- Centralized Logout Button at the very bottom -->
             <div style="text-align: center; margin-top: 40px;">
                 <a href='logout.php' style="color: #ff3333; text-decoration: underline; font-weight: bold; font-size: 16px;">Log Out of Dashboard</a>
             </div>
