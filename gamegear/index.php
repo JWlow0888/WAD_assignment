@@ -29,7 +29,7 @@ $pageTitle = "Welcome to GameGear Exchange! You can buy, sell and trade certifie
         <strong>Quick Access:</strong> 
         <a href="/gamegear/admin/register.php">Admin Register & Login</a>
         <a href="/gamegear/admin/dashboard.php">Admin Dashboard</a>
-        <a href="/gamegear/listings/">Browse Marketplace</a>
+        <a href="/gamegear/listings/index.php">Browse Marketplace</a>
     </div>
 
 </div>

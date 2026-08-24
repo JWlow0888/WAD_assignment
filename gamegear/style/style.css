@@ -228,17 +228,15 @@ th:nth-child(3),td:nth-child(3){
     width: auto; 
 }
 
-/* Blue Submit Button */
 .submit-btn {
-    background-color: #0056b3; 
-    color: white;
-    width: 100%;
-    padding: 12px;
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 10px;
     border: none;
-    font-size: 16px;
-    font-weight: normal;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    width: 100%;
+    font-size: 16px;
 }
 
 .submit-btn:hover {

@@ -20,10 +20,13 @@ CREATE TABLE announcement (
 
 CREATE TABLE products (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
+    title VARCHAR(255) NOT NULL,
     category VARCHAR(50),
     condition_status VARCHAR(50),
-    price DECIMAL(10,2),
+    price DECIMAL(10,2) NOT NULL,
     description TEXT,
-    posted DATETIME
+    image_url VARCHAR(255),
+    is_featured TINYINT(1) DEFAULT 0,
+    is_available TINYINT(1) DEFAULT 1, 
+    posted DATETIME DEFAULT CURRENT_TIMESTAMP
 );

@@ -23,44 +23,35 @@ $pageTitle = "Product Listings & Details";
             <th>Category</th>
             <th>Condition</th>
             <th>Price</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody id="productTableBody">
+        <?php
+        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+        if ($conn) {
 
-        <tr class="product-item" data-category="console" data-price="1200" data-title="playstation 4 pro 1tb">
-            <td><img src="ps4.jpg" style="width: 80px; border-radius: 4px;"></td>
-            <td><strong>PlayStation 4 Pro (1TB)</strong></td>
-            <td>Console</td>
-            <td>Used - Good</td>
-            <td class="new-price">RM 1,200</td>
-        </tr>
+            $sql = "SELECT * FROM products ORDER BY posted DESC";
+            $result = mysqli_query($conn, $sql);
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<tr class="product-item" data-category="'. strtolower(htmlspecialchars($row['category'])) .'">';
+                
+				echo '  <td><img src="../images/' . htmlspecialchars($row['image_url']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
+                
+                echo '  <td><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
+                echo '  <td>'. htmlspecialchars($row['category']) .'</td>';
+                echo '  <td>'. htmlspecialchars($row['condition_status']) .'</td>';
+                echo '  <td class="new-price">RM '. number_format($row['price'], 2) .'</td>';
+                
 
-
-        <tr class="product-item" data-category="pc" data-price="850" data-title="msi gtx 1660 super">
-            <td><img src="1660.jpg" style="width: 80px; border-radius: 4px;"></td>
-            <td><strong>MSI GTX 1660 Super</strong></td>
-            <td>PC Parts</td>
-            <td>Refurbished</td>
-            <td class="new-price">RM 850</td>
-        </tr>
-
-
-        <tr class="product-item" data-category="game" data-price="150" data-title="the legend of zelda breath of the wild switch">
-            <td><img src="game.jpg" style="width: 80px; border-radius: 4px;"></td>
-            <td><strong>Zelda: Breath of the Wild (Switch)</strong></td>
-            <td>Games</td>
-            <td>Like New</td>
-            <td class="new-price">RM 150</td>
-        </tr>
-
-
-        <tr class="product-item" data-category="console" data-price="1800" data-title="xbox series s">
-            <td><img src="xbox.jpg" style="width: 80px; border-radius: 4px;"></td>
-            <td><strong>Xbox Series S 512GB</strong></td>
-            <td>Console</td>
-            <td>Open Box</td>
-            <td class="new-price">RM 1,800</td>
-        </tr>
+                echo '  <td><a href="details.php?id='. $row['id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none;">View Details</a></td>';
+                
+                echo '</tr>';
+            }
+            mysqli_close($conn);
+        }
+        ?>
     </tbody>
 </table>
 

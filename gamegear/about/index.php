@@ -54,7 +54,7 @@ $pageTitle = "About GameGear Exchange";
             <h3>Ready to Level Up?</h3>
             <p>Whether you are a competitive esports player looking for a 240Hz monitor or a retro-enthusiast hunting for a pristine Nintendo 64, you belong here.</p>
             <br>
-            <a href="/gamegear/listings/" class="cta-button large-btn">Explore the Marketplace</a>
+            <a href="/gamegear/listings/index.php" class="cta-button large-btn">Explore the Marketplace</a>
         </section>
 
     </div>
