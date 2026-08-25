@@ -7,8 +7,8 @@ CREATE TABLE users (
     full_name VARCHAR(100) NULL,
     username VARCHAR(50) NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NULL,
-    password_hash VARCHAR(255) NULL,
+    password VARCHAR(200) NULL,
+    password_hash VARCHAR(200) NULL,
     phone VARCHAR(20) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -16,8 +16,8 @@ CREATE TABLE users (
 
 CREATE TABLE admin_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    email VARCHAR(200) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL
 );
 
 
@@ -35,7 +35,7 @@ CREATE TABLE listings (
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
     item_condition ENUM('New','Like New','Used - Good','Used - Fair') NOT NULL DEFAULT 'Used - Good',
-    image_path VARCHAR(255),
+    image_path VARCHAR(200),
     status ENUM('Available','Sold') NOT NULL DEFAULT 'Available',
     is_featured TINYINT(1) NOT NULL DEFAULT 0,
     views INT NOT NULL DEFAULT 0,
@@ -57,7 +57,7 @@ CREATE TABLE comments (
 
 CREATE TABLE announcement (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    subject VARCHAR(255) NOT NULL,
+    subject VARCHAR(200) NOT NULL,
     message TEXT NOT NULL,
     type CHAR(1) NOT NULL,
     posted DATETIME NOT NULL
@@ -67,10 +67,10 @@ CREATE TABLE announcement (
 CREATE TABLE contact_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     salutation VARCHAR(10),
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL,
     phone VARCHAR(20),
-    enquiry_type VARCHAR(255),
+    enquiry_type VARCHAR(250),
     message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -78,7 +78,7 @@ CREATE TABLE contact_messages (
 
 CREATE TABLE purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    buyer_email VARCHAR(255) NOT NULL,
+    buyer_email VARCHAR(200) NOT NULL,
     purchased_items TEXT NOT NULL,
     total_price DECIMAL(10,2) NOT NULL,
     purchase_date DATETIME DEFAULT CURRENT_TIMESTAMP
