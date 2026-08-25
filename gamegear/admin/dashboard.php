@@ -10,7 +10,7 @@ if (!isset($_SESSION['email'])) {
 $dbHost = 'localhost';
 $dbUser = 'root';
 $dbPass = '';
-$dbName = 'gamegear_db'; 
+$dbName = 'gamegear_exchange'; 
 $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 ?>
 
@@ -79,7 +79,7 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
             <?php
             if ($conn) {
-                $sql_prod = "SELECT * FROM products ORDER BY posted DESC";
+                $sql_prod = "SELECT l.*, c.category_name FROM listings l JOIN categories c ON c.category_id = l.category_id ORDER BY l.created_at DESC";
                 $result_prod = mysqli_query($conn, $sql_prod);
                 
                 if (!$result_prod) {
@@ -92,18 +92,18 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
                     echo "<tbody>";
                     while ($row = mysqli_fetch_assoc($result_prod)) {
                         echo "<tr>";
-						echo '<td><img src="../images/' . htmlspecialchars($row['image_url']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 80px; height: auto; border-radius: 4px;"></td>';
-                        echo "<td><strong>" . htmlspecialchars($row['title']) . "</strong><br><span style='font-size: 0.85em; color: #666;'>" . htmlspecialchars($row['category']) . "</span></td>";
+						echo '<td><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 80px; height: auto; border-radius: 4px;"></td>';
+                        echo "<td><strong>" . htmlspecialchars($row['title']) . "</strong><br><span style='font-size: 0.85em; color: #666;'>" . htmlspecialchars($row['category_name']) . "</span></td>";
                         echo "<td>" . number_format($row['price'], 2) . "</td>";
                         
                         echo "<td>";
                         if ($row['is_featured'] == 1) { echo "<span style='background: gold; color: #000; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-right: 5px;'>Featured</span><br>"; }
-                        if ($row['is_available'] == 1) { echo "<span style='background: #28a745; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;'>Available</span>"; }
+                        if ($row['status'] == 'Available') { echo "<span style='background: #28a745; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;'>Available</span>"; }
                         else { echo "<span style='background: #6c757d; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;'>Hidden/Sold</span>"; }
                         echo "</td>";
 
-                        echo "<td><a href='update_product.php?id=" . $row['id'] . "' style='color: rgb(30, 136, 229); font-weight: bold;'>Edit</a></td>";
-                        echo "<td><a href='delete_product.php?id=" . $row['id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a></td>";
+                        echo "<td><a href='update_product.php?id=" . $row['listing_id'] . "' style='color: rgb(30, 136, 229); font-weight: bold;'>Edit</a></td>";
+                        echo "<td><a href='delete_product.php?id=" . $row['listing_id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete this product?\");'>Delete</a></td>";
                         echo "</tr>";
                     }
                     echo "</tbody></table></div>";

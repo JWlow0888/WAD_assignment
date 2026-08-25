@@ -43,9 +43,9 @@ function count_user_rows(PDO $pdo, string $table): int
 function get_user_wishlist(PDO $pdo): array
 {
     $stmt = $pdo->prepare(
-        'SELECT w.id, i.name, i.price, w.created_at
+        'SELECT w.id, i.title AS name, i.price, w.created_at
          FROM wishlist_items w
-         JOIN items i ON i.id = w.item_id
+         JOIN listings i ON i.listing_id = w.item_id
          WHERE w.user_id = ?
          ORDER BY w.created_at DESC'
     );

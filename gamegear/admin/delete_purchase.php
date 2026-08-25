@@ -8,7 +8,7 @@ if (!isset($_SESSION['email'])) {
 
 if (isset($_GET['id'])) {
     $purchase_id = (int)$_GET['id'];
-    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
     if ($conn) {
         $sql = "DELETE FROM purchases WHERE id = $purchase_id";

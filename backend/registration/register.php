@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     	// --- Check for existing username/email before inserting ---
     	if (empty($errors)) {
-        	$stmt = $pdo->prepare('SELECT id FROM users WHERE username = ? OR email = ?');
+        	$stmt = $pdo->prepare('SELECT user_id FROM users WHERE username = ? OR email = ?');
         	$stmt->execute([$username, $email]);
         	if ($stmt->fetch()) {
             		$errors[] = 'That username or email is already registered.';

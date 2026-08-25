@@ -7,7 +7,7 @@ if (!isset($_SESSION['email'])) { header('Location: login.php'); exit(); }
 $dbHost = 'localhost';
 $dbUser = 'root';
 $dbPass = '';
-$dbName = 'gamegear_db';
+$dbName = 'gamegear_exchange';
 $message_out = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

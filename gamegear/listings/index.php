@@ -28,24 +28,24 @@ $pageTitle = "Product Listings & Details";
     </thead>
     <tbody id="productTableBody">
         <?php
-        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
         if ($conn) {
 
-            $sql = "SELECT * FROM products ORDER BY posted DESC";
+            $sql = "SELECT l.*, c.category_name FROM listings l JOIN categories c ON c.category_id = l.category_id ORDER BY l.created_at DESC";
             $result = mysqli_query($conn, $sql);
             
             while ($row = mysqli_fetch_assoc($result)) {
-                echo '<tr class="product-item" data-category="'. strtolower(htmlspecialchars($row['category'])) .'">';
+                echo '<tr class="product-item" data-category="'. strtolower(htmlspecialchars($row['category_name'])) .'">';
                 
-				echo '  <td><img src="../images/' . htmlspecialchars($row['image_url']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
+				echo '  <td><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
                 
                 echo '  <td><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
-                echo '  <td>'. htmlspecialchars($row['category']) .'</td>';
-                echo '  <td>'. htmlspecialchars($row['condition_status']) .'</td>';
+                echo '  <td>'. htmlspecialchars($row['category_name']) .'</td>';
+                echo '  <td>'. htmlspecialchars($row['item_condition']) .'</td>';
                 echo '  <td class="new-price">RM '. number_format($row['price'], 2) .'</td>';
                 
 
-                echo '  <td><a href="details.php?id='. $row['id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none;">View Details</a></td>';
+                echo '  <td><a href="details.php?id='. $row['listing_id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none;">View Details</a></td>';
                 
                 echo '</tr>';
             }

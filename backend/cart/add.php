@@ -24,7 +24,7 @@ if ($item_id <= 0) {
 }
 
 // Optional: confirm the item actually exists in the catalog before adding
-$stmt = $pdo->prepare('SELECT id FROM items WHERE id = ?');
+$stmt = $pdo->prepare('SELECT listing_id FROM listings WHERE listing_id = ?');
 $stmt->execute([$item_id]);
 if (!$stmt->fetch()) {
     	http_response_code(404);

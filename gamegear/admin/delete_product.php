@@ -26,12 +26,12 @@ if (!isset($_SESSION['email'])) { header('Location: login.php'); exit(); }
             echo '<p class="error">Invalid product ID.</p>';
         } else {
 
-            $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+            $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
             if (!$conn) {
                 die('<p class="error">Could not connect to the database.</p>');
             } else {
-                $sql = "DELETE FROM products WHERE id = $id";
+                $sql = "DELETE FROM listings WHERE listing_id = $id";
 
                 if (mysqli_query($conn, $sql) && mysqli_affected_rows($conn) > 0) {
                     echo '<div class="success-message" style="background-color: #fff3f3; border-color: #ffcccc; color: #cc0000;">

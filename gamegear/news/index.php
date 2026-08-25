@@ -4,7 +4,7 @@ $pageTitle = "Announcement";
 $dbHost = 'localhost';
 $dbUser = 'root';
 $dbPass = '';
-$dbName = 'gamegear_db';
+$dbName = 'gamegear_exchange';
 $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 ?>
 <!DOCTYPE html>

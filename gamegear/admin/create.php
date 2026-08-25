@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($subject === '' || $message === '' || $type === '') {
         $message_out = '<p class="error">Please fill in all fields.</p>';
     } else {
-        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
         if (!$conn) {
             die('Could not connect: ' . mysqli_connect_error());

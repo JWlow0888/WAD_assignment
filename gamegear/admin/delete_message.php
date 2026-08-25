@@ -9,7 +9,7 @@ if (!isset($_SESSION['email'])) {
 if (isset($_GET['id'])) {
     $message_id = (int)$_GET['id'];
     
-    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
     if ($conn) {
         $sql = "DELETE FROM contact_messages WHERE id = $message_id";

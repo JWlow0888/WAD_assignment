@@ -2,11 +2,11 @@
 $pageTitle = "Purchase Products";
 session_start();
 
-$conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+$conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 $available_products = [];
 
 if ($conn) {
-    $sql = "SELECT id, title, condition_status, price FROM products WHERE is_available = 1 ORDER BY posted DESC";
+    $sql = "SELECT listing_id AS id, title, item_condition AS condition_status, price FROM listings WHERE status = 'Available' ORDER BY created_at DESC";
     $result = mysqli_query($conn, $sql);
     
     if ($result) {

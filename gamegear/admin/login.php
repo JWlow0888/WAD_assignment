@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db', 3306);
+    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange', 3306);
     
     if (!$conn) {
         die('Connection failed: ' . mysqli_connect_error());

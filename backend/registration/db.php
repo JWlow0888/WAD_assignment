@@ -3,12 +3,12 @@
  * db.php
  * Single shared database connection using PDO.
  * Every other script includes this file to get $pdo.
- *
- 
+ */
+
 $dbHost = 'localhost';
-$dbName = 'webapp_db';      
-$dbUser = 'root';           
-$dbPass = '';               
+$dbName = 'gamegear_exchange';
+$dbUser = 'root';
+$dbPass = '';
 
 
 try {
@@ -30,4 +30,3 @@ try {
     	// In production, log this instead of echoing it
     	die('Database connection failed: ' . $e->getMessage());
 }
-?>

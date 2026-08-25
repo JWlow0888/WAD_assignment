@@ -5,7 +5,7 @@ $success = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
-    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db', 3306);
+    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange', 3306);
 
     if (!$conn) {
         die('Connection failed: ' . mysqli_connect_error());

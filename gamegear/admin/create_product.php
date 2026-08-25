@@ -8,28 +8,29 @@ $message_out = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
-    $category = trim($_POST['category'] ?? '');
+    $category_id = (int)($_POST['category_id'] ?? 0);
     $condition = trim($_POST['condition_status'] ?? '');
     $price = (float)($_POST['price'] ?? 0);
     $image_url = trim($_POST['image_url'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
     $is_available = isset($_POST['is_available']) ? 1 : 0;
+    $status = $is_available ? 'Available' : 'Sold';
 
-    if ($title === '' || $price <= 0) {
+    if ($title === '' || $price <= 0 || $category_id <= 0) {
         $message_out = '<p class="error">Please fill in the required fields.</p>';
     } else {
-        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
         if ($conn) {
             $title = mysqli_real_escape_string($conn, $title);
-            $category = mysqli_real_escape_string($conn, $category);
             $condition = mysqli_real_escape_string($conn, $condition);
             $image_url = mysqli_real_escape_string($conn, $image_url);
             $description = mysqli_real_escape_string($conn, $description);
+            $status = mysqli_real_escape_string($conn, $status);
 
-			$sql = "INSERT INTO products (title, price, category, condition_status, image_url, description, is_featured, is_available) 
-			        VALUES ('$title', '$price', '$category', '$condition', '$image_url', '$description', '$is_featured', '$is_available')";
+			$sql = "INSERT INTO listings (category_id, title, price, item_condition, image_path, description, is_featured, status) 
+			        VALUES ($category_id, '$title', '$price', '$condition', '$image_url', '$description', '$is_featured', '$status')";
 
 					if (mysqli_query($conn, $sql)) {
 	                	$message_out = '<div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; border: 1px solid #c3e6cb; margin-bottom: 20px; text-align: center; font-weight: bold;">
@@ -75,15 +76,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-group" style="flex: 1;">
                     <label>Category</label>
-                    <select name="category">
-                        <option value="console">Console</option>
-                        <option value="pc">PC Parts</option>
-                        <option value="game">Games</option>
+                    <select name="category_id">
+                        <?php
+                        $cat_conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
+                        if ($cat_conn) {
+                            $cat_result = mysqli_query($cat_conn, "SELECT * FROM categories ORDER BY category_name");
+                            while ($cat = mysqli_fetch_assoc($cat_result)) {
+                                echo '<option value="' . $cat['category_id'] . '">' . htmlspecialchars($cat['category_name']) . '</option>';
+                            }
+                            mysqli_close($cat_conn);
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="form-group" style="flex: 1;">
                     <label>Condition</label>
-                    <input type="text" name="condition_status" placeholder="e.g. Used - Good">
+                    <select name="condition_status">
+                        <option value="New">New</option>
+                        <option value="Like New">Like New</option>
+                        <option value="Used - Good" selected>Used - Good</option>
+                        <option value="Used - Fair">Used - Fair</option>
+                    </select>
                 </div>
             </div>
 

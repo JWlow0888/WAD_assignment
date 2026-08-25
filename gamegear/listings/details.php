@@ -4,9 +4,9 @@ $item = null;
 $pageTitle = "Item Not Found";
 
 if ($item_id > 0) {
-    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+    $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
     if ($conn) {
-        $sql = "SELECT * FROM products WHERE id = $item_id LIMIT 1";
+        $sql = "SELECT l.*, c.category_name FROM listings l JOIN categories c ON c.category_id = l.category_id WHERE l.listing_id = $item_id LIMIT 1";
         $result = mysqli_query($conn, $sql);
         
         if ($result && mysqli_num_rows($result) > 0) {
@@ -34,17 +34,17 @@ if ($item_id > 0) {
     <div class="details-layout" style="display: flex; gap: 40px; max-width: 1100px; margin: 0 auto; align-items: flex-start;">
         
         <div class="details-image-section" style="flex: 1; width: 50%;">
-            <img src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" style="width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #dee2e6;">
+            <img src="../images/<?php echo htmlspecialchars($item['image_path']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" style="width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #dee2e6;">
         </div>
 
         <div class="details-info-section" style="flex: 1; width: 50%; text-align: left; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #dee2e6;">
             
             <div class="tags" style="margin-bottom: 10px;">
                 <span style="background-color: rgb(33, 37, 41); color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; margin-right: 10px; text-transform: uppercase;">
-                    <?php echo htmlspecialchars($item['category']); ?>
+                    <?php echo htmlspecialchars($item['category_name']); ?>
                 </span>
                 <span style="background-color: rgb(255, 209, 102); color: rgb(33, 37, 41); padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">
-                    <?php echo htmlspecialchars($item['condition_status']); ?>
+                    <?php echo htmlspecialchars($item['item_condition']); ?>
                 </span>
             </div>
             
@@ -63,10 +63,10 @@ if ($item_id > 0) {
                 </p>
             </div>
             
-            <?php if ($item['is_available'] == 1): ?>
+            <?php if ($item['status'] == 'Available'): ?>
                 <div class="action-buttons" style="display: flex; gap: 15px;">
 
-                    <a href="../purchase/purchase.php?id=<?php echo $item['id']; ?>" class="cta-button" style="flex-grow: 1; text-align: center; padding: 15px; font-size: 16px;">Buy Now</a>
+                    <a href="../purchase/purchase.php?id=<?php echo $item['listing_id']; ?>" class="cta-button" style="flex-grow: 1; text-align: center; padding: 15px; font-size: 16px;">Buy Now</a>
                 </div>
             <?php else: ?>
                 <div style="background-color: #ffebee; color: #c62828; padding: 15px; border-radius: 4px; text-align: center; font-weight: bold; border: 1px solid #ffcdd2;">

@@ -23,7 +23,7 @@ if (!isset($_SESSION['email'])) { header('Location: login.php'); exit(); }
         if ($id <= 0) {
             echo '<p class="error">Invalid post ID.</p>';
         } else {
-            $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+            $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 
             if (!$conn) {
                 die('<p class="error">Could not connect to the database.</p>');

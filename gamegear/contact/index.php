@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($errors)) {
 	        
-	        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_db');
+	        $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 	        if ($conn) {
 	            $enquiry_str = implode(', ', $enquiry); 
 	            

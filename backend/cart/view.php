@@ -17,9 +17,9 @@ require('../session/auth.php');
 require_login();
 
 $stmt = $pdo->prepare(
-    	'SELECT ci.id, ci.quantity, i.name, i.price
+    	'SELECT ci.id, ci.quantity, i.title AS name, i.price
      	FROM cart_items ci
-     	JOIN items i ON i.id = ci.item_id
+     	JOIN listings i ON i.listing_id = ci.item_id
      	WHERE ci.user_id = ?'
 );
 $stmt->execute([$_SESSION['user_id']]);
