@@ -153,11 +153,11 @@ tr:nth-child(even){
 	background-color: rgb(241, 243, 245);
 }
 
-th{
-	padding: 12px 10px 12px 10px;
-	background-color: rgb(30, 136, 229); 
-	color: rgb(255, 255, 255);
-	margin: 0px 0px 0px 0px;
+th {
+    background-color: #111111;
+    color: #82e043;
+    padding: 12px;
+    border-bottom: 3px solid #82e043;
 }
 
 td{

@@ -46,8 +46,8 @@ $pageTitle = "Product Listings & Details";
                 echo '  <td><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
                 echo '  <td style="text-align: center;">'. htmlspecialchars($row['category_name']) .'</td>';
                 echo '  <td style="text-align: center;">'. htmlspecialchars($row['item_condition']) .'</td>';
-                echo '  <td class="new-price" style="text-align: center; font-weight: bold; color: rgb(30, 136, 229);">RM '. number_format($row['price'], 2) .'</td>';
-		echo '  <td style="text-align: center; white-space: nowrap;"><a href="details.php?id='. $row['listing_id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none;">View Details</a></td>';
+                echo '  <td class="new-price" style="text-align: center; font-weight: bold; color: #5ea825;">RM '. number_format($row['price'], 2) .'</td>';
+                echo '  <td style="text-align: center; white-space: nowrap;"><a href="details.php?id='. $row['listing_id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none; background-color: #82e043; color: #111111; font-weight: bold; border-radius: 4px;">View Details</a></td>';
                 
                 echo '</tr>';
                 }
