@@ -65,36 +65,5 @@ $pageTitle = "⚡ Weekend Flash Clearance ⚡";
 
 <?php include('../content/footer.php'); ?>
 
-<script>
-function filterItems(category, buttonElement) {
-    const buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(btn => btn.style.backgroundColor = '#ffffff');
-    buttons.forEach(btn => btn.style.color = '#000000');
-    
-    buttonElement.style.backgroundColor = 'rgb(30, 136, 229)';
-    buttonElement.style.color = '#ffffff';
-
-    const cards = document.querySelectorAll('.product-item');
-    
-    cards.forEach(card => {
-        const itemCat = card.getAttribute('data-category');
-        
-        if (category === 'all' || itemCat === category) {
-            card.style.display = 'flex'; 
-        } else {
-            card.style.display = 'none'; 
-        }
-    });
-}
-
-window.onload = function() {
-    const firstButton = document.querySelector('.filter-btn');
-    if(firstButton) {
-        firstButton.style.backgroundColor = 'rgb(30, 136, 229)';
-        firstButton.style.color = '#ffffff';
-    }
-};
-</script>
-
 </body>
 </html>
