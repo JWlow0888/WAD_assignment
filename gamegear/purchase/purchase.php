@@ -71,6 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	                $total_price += $item['price'];
 	                $purchased_items_html .= "<li>" . htmlspecialchars($item['title']) . " - RM " . number_format($item['price'], 2) . "</li>";
 	                $item_titles[] = $item['title'];
+		    
+   		    $clean_id = (int)$item_id;
+		    $update_sql = "UPDATE listings SET status = 'Sold' WHERE listing_id = $clean_id";
+		    mysqli_query($conn, $update_sql);
 	            }
 	        }
 	        $purchased_items_html .= "</ul>";
@@ -224,51 +228,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <?php include('../content/footer.php'); ?>
 
-    <script>
-    function validatePurchaseForm(event) {
-        let isValid = true;
-        
-	document.getElementById('nameError').textContent = '';
-        document.getElementById('emailError').textContent = '';
-        document.getElementById('phoneError').textContent = '';
-        document.getElementById('productError').textContent = '';
-
-        const name = document.getElementById('buyer_name').value.trim();
-        if (name === '') {
-            document.getElementById('nameError').textContent = 'Please enter your name.';
-            isValid = false;
-        }
-
-        const phone = document.getElementById('buyer_phone').value.trim();
-        if (phone === '') {
-            document.getElementById('phoneError').textContent = 'Please enter your phone number.';
-            isValid = false;
-        }
-
-        const email = document.getElementById('buyer_email').value.trim();
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        
-        if (email === '') {
-            document.getElementById('emailError').textContent = 'Please enter your email to verify your account.';
-            isValid = false;
-        } else if (!emailPattern.test(email)) {
-            document.getElementById('emailError').textContent = 'Please enter a valid email format.';
-            isValid = false;
-        }
-
-        const checkboxes = document.querySelectorAll('input[name="products[]"]');
-        const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        
-        if (!isChecked) {
-            document.getElementById('productError').textContent = 'You must select at least one item to proceed to checkout.';
-            isValid = false;
-        }
-
-        if (!isValid) {
-            event.preventDefault();
-        }
-        return isValid;
-    }
-    </script>
 </body>
 </html>
