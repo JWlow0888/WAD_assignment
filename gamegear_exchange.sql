@@ -128,7 +128,7 @@ INSERT INTO listings (seller_id, category_id, title, description, price, item_co
 (2, 2, 'Xbox Wireless Controller', 'Slightly worn but fully functional, both thumbsticks tight.', 90.00, 'Used - Fair', 'xbox.jpg', 'Available', 0, 5),
 (1, 3, 'Logitech Mechanical Keyboard', 'Barely used, include 1 year warranty.', 150.00, 'Like New', 'keyboard.jpg', 'Available', 1, 8),
 (3, 5, 'ASUS RTX 3070 Graphics Card', 'Upgraded to a newer card, this one still runs great.', 900.00, 'Used - Good', '3070.jpg', 'Available', 1, 20),
-(2, 6, 'Sealed Zelda PS1 Collector Case', 'Rare collectible, kept in display case, never opened.', 300.00, 'New', 'zeldabreathofwild.jpg', 'Sold', 0, 30),
+(2, 6, 'Sealed Zelda PS1 Collector Case', 'Rare collectible, kept in display case, never opened.', 300.00, 'New', 'zeldabreathofwild.jpg', 'Sold', 0, 30);
 
 INSERT INTO comments (listing_id, commenter_name, comment_text) VALUES
 (1, 'Tioe Seng Hao', 'Is the cartridge slot still tight? Interested in buying.'),
