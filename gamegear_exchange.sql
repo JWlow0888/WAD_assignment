@@ -78,7 +78,9 @@ CREATE TABLE contact_messages (
 
 CREATE TABLE purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    buyer_name VARCHAR(255) NOT NULL,
     buyer_email VARCHAR(200) NOT NULL,
+    buyer_phone VARCHAR(20) NOT NULL,
     purchased_items TEXT NOT NULL,
     total_price DECIMAL(10,2) NOT NULL,
     purchase_date DATETIME DEFAULT CURRENT_TIMESTAMP
