@@ -2,6 +2,19 @@
 $pageTitle = "Purchase Products";
 session_start();
 
+if (!isset($_SESSION['user_email'])) {
+    // Save the item ID they wanted to buy so we can send them back here after login!
+    if (isset($_GET['id'])) {
+        $_SESSION['redirect_after_login'] = 'purchase/purchase.php?id=' . (int)$_GET['id'];
+    } else {
+        $_SESSION['redirect_after_login'] = 'purchase/purchase.php';
+    }
+    
+    // Kick them to the new user login page
+    header('Location: ../user_login.php');
+    exit();
+}
+
 $conn = mysqli_connect('localhost', 'root', '', 'gamegear_exchange');
 $available_products = [];
 

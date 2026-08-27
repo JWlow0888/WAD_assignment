@@ -7,6 +7,7 @@
 		<li><a href="/gamegear/purchase/purchase.php">Purchase Available Products</a></li>
 		<li><a href="/gamegear/news/">Latest Announcement</a></li>
 		<li><a href="/gamegear/contact/">Contact Us</a></li>
+		<li><a href="/gamegear/user_login.php">User Login</a></li>
 	</ul>
 </nav>
 
