@@ -124,12 +124,11 @@ INSERT INTO categories (category_name) VALUES
 
 
 INSERT INTO listings (seller_id, category_id, title, description, price, item_condition, image_path, status, is_featured, views) VALUES
-(1, 1, 'Nintendo 64 Console', 'Fully tested N64 console, deep cleaned, comes with one controller.', 250.00, 'Used - Good', 'pc.jpg', 'Available', 0, 12),
+(1, 1, 'AMD Custom PC (ROG)', 'Fully tested with OCCT, MemTest64 and more!', 5000.00, 'Used - Good', 'pc.jpg', 'Available', 0, 12),
 (2, 2, 'Xbox Wireless Controller', 'Slightly worn but fully functional, both thumbsticks tight.', 90.00, 'Used - Fair', 'xbox.jpg', 'Available', 0, 5),
-(1, 3, 'HyperX Cloud II Headset', 'Barely used, comes with original box and mic.', 150.00, 'Like New', 'keyboard.jpg', 'Available', 1, 8),
-(3, 5, 'ASUS RTX Graphics Card', 'Upgraded to a newer card, this one still runs great.', 900.00, 'Used - Good', '3070.jpg', 'Available', 1, 20),
+(1, 3, 'Logitech Mechanical Keyboard', 'Barely used, include 1 year warranty.', 150.00, 'Like New', 'keyboard.jpg', 'Available', 1, 8),
+(3, 5, 'ASUS RTX 3070 Graphics Card', 'Upgraded to a newer card, this one still runs great.', 900.00, 'Used - Good', '3070.jpg', 'Available', 1, 20),
 (2, 6, 'Sealed Zelda PS1 Collector Case', 'Rare collectible, kept in display case, never opened.', 300.00, 'New', 'zeldabreathofwild.jpg', 'Sold', 0, 30),
-(3, 4, 'RGB Gaming Chair', 'Comfortable, minor scuff on armrest, otherwise great condition.', 220.00, 'Used - Good', 'Header.jpg', 'Available', 0, 3);
 
 INSERT INTO comments (listing_id, commenter_name, comment_text) VALUES
 (1, 'Tioe Seng Hao', 'Is the cartridge slot still tight? Interested in buying.'),
