@@ -162,15 +162,19 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
                     echo '<p>No purchases have been made yet.</p>';
                 } else {
                     echo "<div style='overflow-x: auto;'><table style='width:100%; border-collapse: collapse;' class='purchase-table'>";
-                    echo "<thead><tr><th>Buyer Email</th><th>Items Purchased</th><th>Total (RM)</th><th>Date</th><th>Action</th></tr></thead>";
+		    echo "<thead><tr><th>Buyer Info</th><th>Items Purchased</th><th>Total (RM)</th><th>Date</th><th>Action</th></tr></thead>";
                     echo "<tbody>";
-                    while ($row = mysqli_fetch_assoc($result_orders)) {
+while ($row = mysqli_fetch_assoc($result_orders)) {
                         echo "<tr>";
-                        echo "<td><a href='mailto:" . htmlspecialchars($row['buyer_email']) . "' style='color: rgb(30, 136, 229);'>" . htmlspecialchars($row['buyer_email']) . "</a></td>";
-                        echo "<td>" . htmlspecialchars($row['purchased_items']) . "</td>";
-                        echo "<td style='font-weight: bold; color: rgb(30, 136, 229);'>RM " . number_format($row['total_price'], 2) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['purchase_date']) . "</td>";
-                        echo "<td><a href='delete_purchase.php?id=" . $row['id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete this purchase record?\");'>Delete</a></td>";
+                        
+                        echo "<td><strong>" . htmlspecialchars($row['buyer_name'] ?? '') . "</strong><br><a href='mailto:" . htmlspecialchars($row['buyer_email'] ?? '') . "' style='color: 			rgb(30, 136, 229); font-size: 0.9em;'>" . htmlspecialchars($row['buyer_email'] ?? '') . "</a><br><span style='font-size: 0.9em; color: #666;'>" . 					htmlspecialchars($row['buyer_phone'] ?? '') . "</span></td>";
+                        
+                        echo "<td>" . htmlspecialchars($row['purchased_items'] ?? '') . "</td>";
+                        echo "<td style='font-weight: bold; color: rgb(30, 136, 229);'>RM " . number_format($row['total_price'] ?? 0, 2) . "</td>";
+                        
+                        echo "<td>" . htmlspecialchars($row['purchase_date'] ?? '') . "</td>";
+                        echo "<td><a href='delete_purchase.php?id=" . $row['id'] . "' style='color:#ff3333; font-weight: bold;' onclick='return confirm(\"Are you sure you want to delete 			this purchase record?\");'>Delete</a></td>";
+                        
                         echo "</tr>";
                     }
                     echo "</tbody></table></div>";
