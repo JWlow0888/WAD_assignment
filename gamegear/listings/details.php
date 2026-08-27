@@ -56,8 +56,8 @@ if ($item_id > 0) {
                 RM <?php echo number_format($item['price'], 2); ?>
             </div>
 
-            <div style="margin-bottom: 30px;">
-                <h3 style="border-bottom: 2px solid #f0f4f8; padding-bottom: 10px;">Item Description</h3>
+	    <div style="margin-top: 40px; margin-bottom: 30px;">
+                <h3 style="border-bottom: 2px solid #f0f4f8; padding-bottom: 10px; margin-top: 0;">Item Description</h3>
                 <p style="line-height: 1.6; color: #444;">
                     <?php echo nl2br(htmlspecialchars($item['description'])); ?>
                 </p>
