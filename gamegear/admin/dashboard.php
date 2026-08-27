@@ -223,22 +223,5 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
     <?php include('../content/footer.php'); ?>
 
-    <script>
-        function switchTab(tabName) {
-            var sections = document.querySelectorAll('.admin-section');
-            sections.forEach(function(section) {
-                section.style.display = 'none';
-            });
-
-            var links = document.querySelectorAll('.admin-nav-link');
-            links.forEach(function(link) {
-                link.classList.remove('active');
-            });
-
-            document.getElementById('sec-' + tabName).style.display = 'block';
-
-            document.getElementById('nav-' + tabName).classList.add('active');
-        }
-    </script>
 </body>
 </html>
