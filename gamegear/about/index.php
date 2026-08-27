@@ -1,11 +1,12 @@
 <?php
 $pageTitle = "About GameGear Exchange";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../style/style.css"> <!-- Adjust path if needed -->
+    <link rel="stylesheet" href="../style/style.css">
     <title>About Us | GameGear Exchange</title>
 </head>
 <body>
@@ -13,6 +14,7 @@ $pageTitle = "About GameGear Exchange";
   <?php include('../content/navigation.php'); ?>
 
 <div id="contentWrapper">
+
     <div class="about-container">
         
         <section class="about-hero">

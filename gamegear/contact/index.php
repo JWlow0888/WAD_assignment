@@ -1,6 +1,4 @@
 <?php
-$pageTitle = "Contact Us";
-
 $name = $email = $phone = $message = $salutation = '';
 $enquiry = [];
 $errors = [];

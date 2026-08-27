@@ -24,13 +24,23 @@ $errors = [];
 $successMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $buyer_name = trim($_POST['buyer_name'] ?? '');
     $buyer_email = trim($_POST['buyer_email'] ?? '');
+    $buyer_phone = trim($_POST['buyer_phone'] ?? '');
     $selected_products = $_POST['products'] ?? [];
+
+    if (empty($buyer_name)) {
+        $errors['buyer_name'] = "Name is required.";
+    }
 
     if (empty($buyer_email)) {
         $errors['buyer_email'] = "Buyer Email is required for verification.";
     } elseif (!filter_var($buyer_email, FILTER_VALIDATE_EMAIL)) {
         $errors['buyer_email'] = "Please enter a valid email address.";
+    }
+
+    if (empty($buyer_phone)) {
+        $errors['buyer_phone'] = "Phone number is required.";
     }
 
     if (empty($selected_products)) {
@@ -52,17 +62,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	        }
 	        $purchased_items_html .= "</ul>";
 
-	        $db_email = mysqli_real_escape_string($conn, $buyer_email);
-	        $db_items = mysqli_real_escape_string($conn, implode(', ', $item_titles));
-	        
-	        $sql_insert = "INSERT INTO purchases (buyer_email, purchased_items, total_price) 
-	                       VALUES ('$db_email', '$db_items', '$total_price')";
-	        mysqli_query($conn, $sql_insert);
+        	$db_name = mysqli_real_escape_string($conn, $buyer_name);
+        	$db_email = mysqli_real_escape_string($conn, $buyer_email);
+        	$db_phone = mysqli_real_escape_string($conn, $buyer_phone);
+        	$db_items = mysqli_real_escape_string($conn, implode(', ', $item_titles));
+        
+        	$sql_insert = "INSERT INTO purchases (buyer_name, buyer_email, buyer_phone, purchased_items, total_price) 
+                       	VALUES ('$db_name', '$db_email', '$db_phone', '$db_items', '$total_price')";
+        	mysqli_query($conn, $sql_insert);
 
-	        $successMessage = "
-            <div class='success-message' style='text-align: left;'>
+        	$successMessage = "
+            	<div class='success-message' style='text-align: left;'>
                 <h2 style='text-align: center; margin-top: 0;'>Order Confirmed!</h2>
-                <p><strong>Verified Account:</strong> " . htmlspecialchars($buyer_email) . "</p>
+                <p><strong>Buyer Name:</strong> " . htmlspecialchars($buyer_name) . "</p>
+                <p><strong>Contact Info:</strong> " . htmlspecialchars($buyer_email) . " | " . htmlspecialchars($buyer_phone) . "</p>
                 <p><strong>Items Pending:</strong></p>
                 $purchased_items_html
                 <hr>
@@ -133,11 +146,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <form id="purchaseForm" action="" method="post" onsubmit="return validatePurchaseForm(event)">
                 
-                <!-- Account Verification Field -->
+                <div class="form-group">
+                    <label for="buyer_name" style="font-size: 1.2em;">Your Name:</label>
+                    <input type="text" id="buyer_name" name="buyer_name" value="<?php echo htmlspecialchars($_POST['buyer_name'] ?? ''); ?>" style="padding: 12px; font-size: 16px;">
+                    <div id="nameError" class="error"><?php echo $errors['buyer_name'] ?? ''; ?></div>
+                </div>
+
                 <div class="form-group">
                     <label for="buyer_email" style="font-size: 1.2em;">Verify Your Buyer Email:</label>
                     <input type="email" id="buyer_email" name="buyer_email" value="<?php echo htmlspecialchars($_POST['buyer_email'] ?? ''); ?>" style="padding: 12px; font-size: 16px;">
                     <div id="emailError" class="error"><?php echo $errors['buyer_email'] ?? ''; ?></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="buyer_phone" style="font-size: 1.2em;">Your Phone Number:</label>
+                    <input type="tel" id="buyer_phone" name="buyer_phone" value="<?php echo htmlspecialchars($_POST['buyer_phone'] ?? ''); ?>" style="padding: 12px; font-size: 16px;">
+                    <div id="phoneError" class="error"><?php echo $errors['buyer_phone'] ?? ''; ?></div>
                 </div>
 
                 <br>
@@ -191,8 +215,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function validatePurchaseForm(event) {
         let isValid = true;
         
+	document.getElementById('nameError').textContent = '';
         document.getElementById('emailError').textContent = '';
+        document.getElementById('phoneError').textContent = '';
         document.getElementById('productError').textContent = '';
+
+        const name = document.getElementById('buyer_name').value.trim();
+        if (name === '') {
+            document.getElementById('nameError').textContent = 'Please enter your name.';
+            isValid = false;
+        }
+
+        const phone = document.getElementById('buyer_phone').value.trim();
+        if (phone === '') {
+            document.getElementById('phoneError').textContent = 'Please enter your phone number.';
+            isValid = false;
+        }
 
         const email = document.getElementById('buyer_email').value.trim();
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

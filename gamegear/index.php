@@ -1,6 +1,5 @@
 <?php
-
-$pageTitle = "Welcome to GameGear Exchange! You can buy, sell and trade certified pre-owned gear here. What are you waiting for? Level up your setup now!";
+$pageTitle = "Certified Secondhand Quality";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,6 @@ $pageTitle = "Welcome to GameGear Exchange! You can buy, sell and trade certifie
  	<?php include('content/navigation.php'); ?>
 <div id="contentWrapper">
 	<article>
-		<h1>Certified Secondhand Quality</h1>
 		<p>The GameGear Exchange is a secondhand gaming equipment marketplace website where every console and component goes through our rigorous testing process. Game with absolute peace of mind.</p>
 		<img src="game.jpg" width="960" height="300">
 		<ul>

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Announcement";
+$pageTitle = "News & Updates";
 
 $dbHost = 'localhost';
 $dbUser = 'root';

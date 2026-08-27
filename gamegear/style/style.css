@@ -165,14 +165,6 @@ td{
 	margin: 0px 0px 0px 0px;
 }
 
-th:nth-child(1),th:nth-child(2),td:nth-child(1),td:nth-child(2){
-	width: 90px;
-}
-
-th:nth-child(3),td:nth-child(3){
-	width: 440px;
-}
-
 .form-container {
     background-color: rgb(233, 236, 239); 
     max-width: 600px;

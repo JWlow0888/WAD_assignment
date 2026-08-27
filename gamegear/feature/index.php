@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Featured Items On Sale";
+$pageTitle = "⚡ Weekend Flash Clearance ⚡";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,6 @@ $pageTitle = "Featured Items On Sale";
     <?php include('../content/navigation.php'); ?>
 
 <div id="contentWrapper">
-    <div style="text-align: center; margin-bottom: 30px;">
-        <h2>⚡ Weekend Flash Clearance ⚡</h2>
-        <p>Certified pre-owned gear at maximum markdown.</p>
-    </div>
-
     <div class="filter-controls" style="text-align: center; margin-bottom: 40px;">
         <button class="filter-btn active" onclick="filterItems('all', this)">All Featured</button>
         <?php
