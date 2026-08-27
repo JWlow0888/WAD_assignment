@@ -58,22 +58,6 @@ $pageTitle = "Product Listings & Details";
     </table>
 </div>
 
-<script>
-    function searchListings() {
-        var text = document.getElementById("searchBox").value;
-        var ajax = new XMLHttpRequest();
-
-        ajax.open("GET", "search_listings.php?query=" + encodeURIComponent(text), true);
-        ajax.send();
-
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                document.getElementById("productTableBody").innerHTML = ajax.responseText;
-            }
-        };
-    }
-</script>
-
 </table>
 
 </div>
