@@ -89,12 +89,13 @@ nav a, nav a:link, nav a:visited{
 	color: rgb(240, 240, 240);
 }
 
-nav a:hover {
-	color: rgb(180,180,180);
+nav a, nav a:link, nav a:visited{
+	color: rgb(240, 240, 240);
 	text-decoration: none;
 }
 
-a:hover{
+nav a:hover {
+	color: rgb(180,180,180);
 	text-decoration: underline;
 }
 
