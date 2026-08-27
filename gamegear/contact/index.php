@@ -79,52 +79,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <?php include('../content/footer.php'); ?>
 
-    <!-- Client-Side Validation Script -->
-    <script>
-    function validateForm(event) {
-        let isValid = true;
-        const form = document.getElementById('contactForm');
-        
-        // Clear previous error messages
-        document.querySelectorAll('.error').forEach(div => div.textContent = '');
-        
-        if (form['salutation'].value.trim() === '') {
-            document.getElementById('salutationError').textContent = 'Please select your salutation.';
-            isValid = false;
-        }
-        if (form['name'].value.trim() === '') {
-            document.getElementById('nameError').textContent = 'Name is required.';
-            isValid = false;
-        }
-        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (form['email'].value.trim() === '') {
-            document.getElementById('emailError').textContent = 'Email is required.';
-            isValid = false;
-        } else if (!emailPattern.test(form['email'].value)) {
-            document.getElementById('emailError').textContent = 'Email is not valid.';
-            isValid = false;
-        }
-        if (form['phone'].value.trim() === '') {
-            document.getElementById('phoneError').textContent = 'Phone number is required.';
-            isValid = false;
-        } else if (!/^[\d\s\-\(\)]{10,15}$/.test(form['phone'].value)) {
-            document.getElementById('phoneError').textContent = 'Enter a valid phone number (10-15 digits).';
-            isValid = false;
-        }
-        let checkboxes = document.querySelectorAll('input[name="enquiry[]"]');
-        let isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        if (!isChecked) {
-            document.getElementById('enquiryError').textContent = 'Please select at least one enquiry.';
-            isValid = false;
-        }
-        if (form['message'].value.trim() === '') {
-            document.getElementById('messageError').textContent = 'Message is required.';
-            isValid = false;
-        }
-        
-        if (!isValid) { event.preventDefault(); }
-        return isValid;
-    }
-    </script>
 </body>
 </html>
