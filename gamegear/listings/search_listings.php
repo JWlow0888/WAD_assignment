@@ -16,9 +16,9 @@ if ($conn) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr class="product-item" data-category="'. strtolower(htmlspecialchars($row['category_name'])) .'">';
             
-            echo '  <td><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
+            echo '  <td style="text-align: center;"><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
             echo '  <td><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
-            echo '  <td>'. htmlspecialchars($row['category_name']) .'</td>';
+            echo '  <td style="text-align: center;">'. htmlspecialchars($row['category_name']) .'</td>';
             
             echo '  <td style="text-align: center;">'. htmlspecialchars($row['item_condition']) .'</td>';
             echo '  <td class="new-price" style="text-align: center; font-weight: bold; color: #5ea825;">RM '. number_format($row['price'], 2) .'</td>';

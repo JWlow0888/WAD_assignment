@@ -56,11 +56,9 @@ $pageTitle = "Product Listings & Details";
             ?>
         </tbody>
     </table>
-</div>
-
-</table>
 
 </div>
+	<script src="../javascript/main.js"></script>
 	<?php include('../content/footer.php'); ?>
 </body>
 </html>
