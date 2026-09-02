@@ -21,7 +21,6 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
     <link rel="stylesheet" href="../style/style.css">
     <title>Admin Dashboard | GameGear Exchange</title>
     <style>
-        /* New Sidebar Layout Styles */
         .admin-layout {
             display: flex;
             max-width: 1400px;
@@ -59,7 +58,6 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
             background: #e9ecef;
         }
 
-        /* The active tab style */
         .admin-nav-link.active {
             background: #e3f2fd;
             color: rgb(30,136,229);
@@ -77,7 +75,6 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
             min-height: 600px;
         }
 
-        /* Hides sections by default for the tab system */
         .admin-section {
             display: none; 
         }
@@ -98,7 +95,7 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
             <a class="admin-nav-link" id="nav-purchases" onclick="switchTab('purchases')">🛒 Order Purchases</a>
             
             <hr style="border: 0; border-top: 1px solid #dee2e6; margin: 20px 0;">
-            <a href="logout.php" class="admin-nav-link" style="color: #ff3333; text-align: center; font-weight: bold;">Log Out</a>
+            <a href="logout.php" onclick="return confirm('Are you sure you want to log out of the admin dashboard?');" class="admin-nav-link" style="color: #ff3333; text-align: center; font-weight: bold;">Log Out</a>
         </div>
 
         <div class="admin-content">
@@ -221,6 +218,23 @@ $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
         </div>
     </div>
 
+    <script>
+        function switchTab(tabName) {
+            var sections = document.querySelectorAll('.admin-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            var links = document.querySelectorAll('.admin-nav-link');
+            links.forEach(function(link) {
+                link.classList.remove('active');
+            });
+
+            document.getElementById('sec-' + tabName).style.display = 'block';
+
+            document.getElementById('nav-' + tabName).classList.add('active');
+        }
+    </script>
     <?php include('../content/footer.php'); ?>
 
 </body>
