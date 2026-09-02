@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <nav id="topNavigation">
 	<ul>
 		<li><a href="/gamegear/">Home</a></li>
@@ -7,7 +12,15 @@
 		<li><a href="/gamegear/purchase/purchase.php">Purchase Available Products</a></li>
 		<li><a href="/gamegear/news/">Latest Announcement</a></li>
 		<li><a href="/gamegear/contact/">Contact Us</a></li>
-		<li><a href="/gamegear/user_login.php">User Login</a></li>
+		<?php if(isset($_SESSION['user_email'])): ?>
+                <li>
+                    <a href="/gamegear/user_logout.php" onclick="return confirm('Are you sure you want to log out?');" style="color: #ffcdd2; font-weight: bold;">
+                        Log Out (<?php echo htmlspecialchars($_SESSION['user_name']); ?>)
+                    </a>
+                </li>
+            <?php else: ?>
+                <li><a href="/gamegear/user_login.php">Login (Buyer)</a></li>
+            <?php endif; ?>
 	</ul>
 </nav>
 
