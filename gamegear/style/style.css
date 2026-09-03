@@ -427,3 +427,129 @@ td{
     padding: 15px 35px;
     font-size: 16px;
 }
+
+/* ========================================================
+   RESPONSIVE DESIGN — CSS MEDIA QUERIES
+   Breakpoints: 992px (tablet), 768px (large phone), 480px (phone)
+   ======================================================== */
+
+/* Tablet and below */
+@media (max-width: 992px) {
+    table {
+        width: 100%;
+    }
+
+    .about-hero, .about-story {
+        padding: 25px 20px;
+    }
+
+    .quick-access-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
+/* Large phones / small tablets */
+@media (max-width: 768px) {
+    #topNavigation {
+        padding: 10px 10px 18px 10px;
+    }
+
+    #topNavigation li {
+        display: inline-block;
+        margin: 4px 8px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 1.7em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    #contentWrapper {
+        padding: 25px 12px 25px 12px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 8px 6px;
+    }
+
+    .form-container {
+        max-width: 100%;
+        padding: 25px 20px;
+    }
+
+    .news-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    #topNavigation li {
+        display: block;
+        margin: 6px 0;
+    }
+
+    h1 {
+        font-size: 1.4em;
+    }
+
+    #pageHeader h1 {
+        font-size: 1.2em;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 12px;
+        border-bottom: 2px solid rgb(15,15,17);
+    }
+
+    td {
+        text-align: right !important;
+        padding-left: 45% !important;
+        position: relative;
+        border-bottom: 1px solid rgb(230,230,230);
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 40%;
+        text-align: left;
+        font-weight: bold;
+        color: rgb(30, 136, 229);
+    }
+
+    .quick-access-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .about-cta {
+        padding: 30px 18px;
+    }
+}
