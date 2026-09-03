@@ -10,3 +10,7 @@ Please delete your old databases and import the new gamegear_sql i have integrat
 Update 27-8
 Please make sure your new code uses the new database fields and don't make another sql database follow the gamegear_exchange.sql.
 If you update your code and you want to make a new table in the database do so in gamegear_exchange.sql and delete the old database and import the new one in phpMyAdmin. This is because we need to know you added a new table or not.
+
+Update 3-9
+Added Responsive Design Implementation for css for marking rebrics
+changes are made in listings index and search_listings
