@@ -428,10 +428,6 @@ td{
     font-size: 16px;
 }
 
-/* ========================================================
-   RESPONSIVE DESIGN — CSS MEDIA QUERIES
-   Breakpoints: 992px (tablet), 768px (large phone), 480px (phone)
-   ======================================================== */
 
 /* Tablet and below */
 @media (max-width: 992px) {
