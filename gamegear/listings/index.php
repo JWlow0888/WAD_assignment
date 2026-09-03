@@ -42,12 +42,12 @@ $pageTitle = "Product Listings & Details";
                 $result = mysqli_query($conn, $sql);
                 while ($row = mysqli_fetch_assoc($result)) {
 		echo '<tr class="product-item" data-category="'. strtolower(htmlspecialchars($row['category_name'])) .'">';
-                echo '  <td style="text-align: center;"><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
-                echo '  <td><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
-                echo '  <td style="text-align: center;">'. htmlspecialchars($row['category_name']) .'</td>';
-                echo '  <td style="text-align: center;">'. htmlspecialchars($row['item_condition']) .'</td>';
-                echo '  <td class="new-price" style="text-align: center; font-weight: bold; color: #5ea825;">RM '. number_format($row['price'], 2) .'</td>';
-                echo '  <td style="text-align: center; white-space: nowrap;"><a href="details.php?id='. $row['listing_id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none; background-color: #82e043; color: #111111; font-weight: bold; border-radius: 4px;">View Details</a></td>';
+                echo '  <td data-label="Image" style="text-align: center;"><img src="../images/' . htmlspecialchars($row['image_path']) . '" alt="' . htmlspecialchars($row['title']) . '" style="width: 100px; height: auto;"></td>';
+                echo '  <td data-label="Item Details"><strong>'. htmlspecialchars($row['title']) .'</strong></td>';
+                echo '  <td data-label="Category" style="text-align: center;">'. htmlspecialchars($row['category_name']) .'</td>';
+                echo '  <td data-label="Condition" style="text-align: center;">'. htmlspecialchars($row['item_condition']) .'</td>';
+                echo '  <td data-label="Price" class="new-price" style="text-align: center; font-weight: bold; color: #5ea825;">RM '. number_format($row['price'], 2) .'</td>';
+                echo '  <td data-label="Action" style="text-align: center; white-space: nowrap;"><a href="details.php?id='. $row['listing_id'] .'" class="cta-button" style="padding: 8px 12px; font-size: 14px; text-decoration: none; background-color: #82e043; color: #111111; font-weight: bold; border-radius: 4px;">View Details</a></td>';
                 
                 echo '</tr>';
                 }
