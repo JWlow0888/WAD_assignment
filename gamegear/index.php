@@ -105,7 +105,7 @@ $pageTitle = "Certified Secondhand Quality";
         <a href="/gamegear/admin/dashboard.php">Admin Dashboard</a>
         <a href="/gamegear/listings/index.php">Browse Full Marketplace</a>
         <a href="/gamegear/news/index.php">View More Information Updates</a>
-        <a href="/gamegear/listings/index.php">Contact With Us</a>
+		<a href="/gamegear/contact/index.php">Contact With Us</a>
     </div>
 
 </div>
