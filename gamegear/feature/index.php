@@ -63,6 +63,8 @@ $pageTitle = "⚡ Weekend Flash Clearance ⚡";
     </div>
 </div>
 
+<script src="../javascript/main.js"></script>
+
 <?php include('../content/footer.php'); ?>
 
 </body>
