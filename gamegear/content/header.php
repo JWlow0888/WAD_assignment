@@ -1,3 +1,3 @@
 <header id="pageHeader">
-	<img src="http://localhost/gamegear/images/header.jpg" width="100%">
+	<img src="http://localhost/gamegear/images/Header.jpg" width="100%">
 </header>
