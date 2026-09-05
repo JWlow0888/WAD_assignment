@@ -14,3 +14,6 @@ If you update your code and you want to make a new table in the database do so i
 Update 3-9
 Added Responsive Design Implementation for css for marking rebrics
 changes are made in listings index and search_listings
+
+Update 5-9 
+deleted some dead code purchase.php in gamegear folder not the one in purchase folder
